@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divya's Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap');
+
+        :root {
+            --primary: hsla(106, 99%, 41%, 0.765);
+            --secondary: #0b0d0a;
+            --background: #16160e;
+            --accent: #f1f6f7;
+            --white: #0d0712;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--primary);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            position: fixed;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 2px 20px rgba(233, 227, 227, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--background);
+        }
+        .nav-brand1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(to bottom, var(--background), var(--white));
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--background);
+            transform: translateY(-2px);
+        }
+
+        .profile-container {
+            position: relative;
+        }
+
+        .profile-image {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--accent);
+            box-shadow: 0 20px 40px rgba(141, 85, 36, 0.2);
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-blur {
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background: var(--accent);
+            filter: blur(40px);
+            opacity: 0.3;
+            transform: translate(-16px, 16px);
+            z-index: 0;
+        }
+
+        /* Expertise Section */
+        .expertise {
+            padding: 8rem 2rem;
+            background: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            color:white
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--background);
+            padding: 2.5rem;
+            border-radius: 24px;
+            border: 1px solid var(--accent);
+            transition: all 0.3s ease;
+            color: whitesmoke;
+            text-align: center; 
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(141, 85, 36, 0.1);
+        }
+
+        .card-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    color: var(--primary);
+    
+}
+
+
+        .card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .card p {
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .btn-group {
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .profile-image {
+                width: 250px;
+                height: 250px;
+            }
+
+            .profile-blur {
+                width: 250px;
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-brand1">Divya.</div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#expertise">Expertise</a>
+                <a href="#Experience">Experience</a>
+                <a href="#Projects">Projects</a>
+                <a href="#certificates">certificates</a>
+                <a href="#AdditionalAchievements">Additional Achievements</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="about"class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Hello, I'm Divyashree</h1>
+                <p>Software Developer & UI/UX Designer crafting elegant digital experiences</p>
+                <div class="btn-group">
+                    <a href="#Projects" class="btn btn-primary">View My Work</a>
+                    <a href="contact.html" class="btn btn-outline">Get in Touch</a>
+                </div>
+            </div>
+            <div class="profile-container">
+                <div class="profile-blur"></div>
+                <div class="profile-image">
+                    <img src="me6.jpg" alt="Divya">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="expertise" class="expertise">
+        <h2 class="section-title">Areas of Expertise</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon"><img src="fulll logo.png" width="100px" height="100px" style="display: flex; justify-content: center;" alt="not found" ></div>
+                <h3>Full stack Developer</h3>
+                <img src="fulll logo2.png" width="318px" height="200px" alt="not found" >
+                <p>Created a Finance website Using MERN</p>
+                <p>Created a Backend for Event Management using Express nodejs</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><img src="fig logo.jpeg" alt="not found" width="100px" height="100px" style="display: flex; justify-content: center;" ></div>
+                <h3>Project desginer</h3>
+                <img src="fig logo2.jpeg" width="318px" height="200px" alt="not found" >
+                <p>Crafting intuitive Poster and logo </p>
+                <p>Created a frontend ui design for H-care website </p>
+                <p>Created a Poster  design for Devhost sample </p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><img src="lead logo.png" width="100px" height="100px" style="display: flex; justify-content: center;" alt="not found" ></div>
+                <h3>Leadership Skills</h3>
+                <img src="lead logo2.png" width="318px" height="200px" alt="not found" >
+                <p>Mentor Role for internship students @Coding key Company</p>
+                <p>Volunteer of IEEE Cosmic Event-2024</p>
+                <p>Volunteer of SIH-2024 @Sahyadri college</p>
+                <p>Volunteer of Intra college event "Synergia-DEVHOST(2024)" @Sahyadri college</p>
+            </div>
+        </div>
+    </section>
+    <section class="Experience" id="Experience" style="padding: 8rem 2rem; background: var(--background);">
+        <h2 class="section-title">Experience</h2>
+        <div class="cards-grid" style="max-width: 1200px; margin: 0 auto;">
+            <div class="card">
+                <h3>Integral Engineer</h3>
+                <img src="logo.jpeg" alt="not found">
+                <p style="font-weight: 500; margin-bottom: 0.5rem;">Ericsson | Sep 2024 - Oct 2024</p>
+                <ul style="list-style: none; margin-top: 1rem;">
+                    <li style="margin-bottom: 0.8rem;">• Developed a POC for the "E2E Development Pipeline Exploration," integrating AI/ML into the SDLC to automate the generation of SRS, HLD, LLD, and other software documentation, reducing manual effort.</li>
+                </ul>
+                <a href="https://github.com/divya05shree/Ericsson-internship" 
+                       style="color: var(--primary); text-decoration: underline;"
+                       target="_blank">GitHub Repository</a>
+            </div>
+            
+            <div class="card">
+                <h3>Machine Learning Intern</h3>
+                <img src="logo3.jpeg" alt="not found">
+                <p style="font-weight: 500; margin-bottom: 0.5rem;">CodSoft | May 2024 - June 2024</p>
+                <ul style="list-style: none; margin-top: 1rem;">
+                    <li style="margin-bottom: 0.8rem;">• Worked on ML projects like spam detection, customer churn prediction, and credit fraud detection, focusing on data preprocessing, feature engineering, and model development.</li>
+                </ul>
+                <a href="https://github.com/divya05shree/codsoft11" 
+                       style="color: var(--primary); text-decoration: underline;"
+                       target="_blank">GitHub Repository</a>
+            </div>
+    
+            <div class="card">
+                <h3>Full Stack Intern</h3>
+                <img src="logo2.png" alt="not found">
+                <p style="font-weight: 500; margin-bottom: 0.5rem;">Cognifyz Technologies | Feb 2024 - Mar 2024</p>
+                <ul style="list-style: none; margin-top: 1rem;">
+                    <li style="margin-bottom: 0.8rem;">• Completed Tasks including HTML Structure, Basic Server Interaction, and Server-Side Validation</li>
+                </ul>
+                <a href="https://github.com/divya05shree/codsoft11" 
+                       style="color: var(--primary); text-decoration: underline;"
+                       target="_blank">GitHub Repository</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section id ="Projects"class="Projects" style="padding: 8rem 2rem; background: var(--white);">
+        <h2 class="section-title">Projects</h2>
+        <div class="cards-grid" style="max-width: 1200px; margin: 0 auto;">
+            <div class="card">
+                <h3>AI-Driven Depression Recovery Tool</h3>
+                <img src="ai.jpg" alt="not found" width="318px" height="159px">
+                <p style="margin-bottom: 1rem;">
+                    <a href="https://github.com/divya05shree/Ai_Driven_Depression_recovery" 
+                       style="color: var(--primary); text-decoration: underline;"
+                       target="_blank">GitHub Repository</a>
+                </p>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 0.8rem;">• Developed an AI-powered tool using CNN for Facial Emotion Recognition (FER) and Naive Bayes for text emotion analysis</li>
+                    <li style="margin-bottom: 0.8rem;">• Implemented preprocessing techniques for facial detection and text cleaning</li>
+                    <li>• Integrated Beck's Depression Inventory (BDI) scoring for predictive modeling</li>
+                </ul>
+            </div>
+    
+            <div class="card">
+                <h3>Placement Preparation Planner</h3>
+                <img src="dbms.jpg" alt="not found" width="318px" height="159px">
+                <p style="margin-bottom: 1rem;">
+                    <a href="https://github.com/divya05shree/Placement_preparation_planner" 
+                       style="color: var(--primary); text-decoration: underline;"
+                       target="_blank">GitHub Repository</a>
+                </p>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 0.8rem;">• Created a structured planner for engineering students covering technical skills, soft skills, and aptitude</li>
+                    <li style="margin-bottom: 0.8rem;">• Provided personalized guidance through backend integration</li>
+                    <li>• Enhanced user experience with real-time tracking and resource updates</li>
+                </ul>
+            </div>
+        </div>
+        <section id="certificates" class="certificates">
+            <h2 class="section-title">Certificates</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <!-- <div class="card-icon"><img src="ml.png" width="318px" height="159px" style="display: flex; justify-content: center;" alt="not found" ></div> -->
+                    <h3>Machine Learning</h3>
+                    <img src="ml.png" width="318px" height="180px" alt="not found" >
+                    
+                </div>
+                <div class="card">
+                    <!-- <div class="card-icon"><img src="fig logo.jpeg" alt="not found" width="100px" height="100px" style="display: flex; justify-content: center;" ></div> -->
+                    <h3>Power-Bi</h3>
+                    <img src="powerbi.png" width="318px" height="180px" alt="not found" >
+                   
+                </div>
+                <div class="card">
+                    <!-- <div class="card-icon"><img src="lead logo.png" width="100px" height="100px" style="display: flex; justify-content: center;" alt="not found" ></div> -->
+                    <h3>Postman Api</h3>
+                    <img src="postman.png" width="318px" height="180px" alt="not found" >
+                   
+                </div>
+                <div class="card">
+                    <!-- <div class="card-icon"><img src="lead logo.png" width="100px" height="100px" style="display: flex; justify-content: center;" alt="not found" ></div> -->
+                    <h3>Tce-Full stack development</h3>
+                    <img src="tce.png" alt="not found" width="320px" height="270px">
+                   
+                </div>
+            </div>
+        </section>
+    
+        <!-- Additional Achievements -->
+        <section id="AdditionalAchievements" class="Additional Achievements"style="max-width: 1200px; margin: 4rem auto 0; text-align: center;">
+            <h3 style="font-family: 'Playfair Display', serif; margin-bottom: 1.5rem;">Additional Achievements</h3>
+            <p style="color: var(--black);">
+                SIH participant|Intra collge Event "Synergia" Hackathon  Runner ups|IEEE Member | Attended IEEE Cosmic Event-2024 | Industry Visits to Sophrosyne Semiconductor and CodeZyng Pvt.Ltd in Udupi.
+            </p>
+        </section>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <h2>Let's Connect</h2>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/divyashree-00b62826a/">LinkedIn</a>
+                <a href="https://github.com/divya05shree">GitHub</a>
+                
+            </div>
+            <p>© 2024 Divya - All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

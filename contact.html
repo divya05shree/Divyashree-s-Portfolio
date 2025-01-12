@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .contact-form {
+            background-color: black;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px 5px rgba(0, 255, 0, 0.5);
+            width: 300px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #00FF00; /* Neon green color */
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #00FF00;
+            border-radius: 5px;
+            background-color: black;
+            color: white;
+            font-size: 1em;
+        }
+
+        input[type="submit"] {
+            background-color: #00FF00;
+            border: none;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1.1em;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #00CC00;
+        }
+
+        a {
+            color: #00FF00;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin-top: 15px;
+            display: block;
+        }
+
+        a:hover {
+            color: #00CC00;
+        }
+    </style>
+</head>
+<body>
+    <div class="contact-form" id="contact">
+        <h1>Get in Touch</h1>
+        <form action="your-other-page.html" method="GET">
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <input type="submit" value="Send Message">
+        </form>
+        <a href="index.html">Go to another page</a>
+    </div>
+</body>
+</html>
