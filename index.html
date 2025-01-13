@@ -6,6 +6,9 @@
     <title>Divya's Portfolio</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap');
+        html {
+    scroll-behavior: smooth;
+}
 
         :root {
             --primary: hsla(106, 99%, 41%, 0.765);
@@ -20,12 +23,73 @@
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--background);
             color: var(--primary);
             line-height: 1.6;
+            position: relative;
+        }
+        a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+}
+.btn-primary {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+        /* Bubble Animation Styles */
+        .bubble-wrap {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(
+                circle at 30% 30%,
+                rgba(106, 255, 41, 0.05) 0%,
+                rgba(106, 255, 41, 0.02) 60%,
+                rgba(106, 255, 41, 0.01) 100%
+            );
+            box-shadow: 0 0 10px rgba(106, 255, 41, 0.03);
+            backdrop-filter: blur(1px);
+            animation: rise 12s infinite ease-in;
+            opacity: 0;
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translateY(100%) translateX(-50%) scale(0.2);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.2;
+            }
+            50% {
+                opacity: 0.15;
+            }
+            70% {
+                opacity: 0.1;
+            }
+            100% {
+                transform: translateY(-100%) translateX(50%) scale(1);
+                opacity: 0;
+            }
         }
 
         .navbar {
@@ -86,6 +150,8 @@
             background: linear-gradient(to bottom, var(--background), var(--white));
             display: flex;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
 
         .hero-content {
@@ -183,6 +249,8 @@
         .expertise {
             padding: 8rem 2rem;
             background: var(--white);
+            position: relative;
+            z-index: 1;
         }
 
         .section-title {
@@ -191,7 +259,7 @@
             font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
             color: var(--primary);
-            color:white
+            color: white;
         }
 
         .cards-grid {
@@ -207,26 +275,26 @@
             padding: 2.5rem;
             border-radius: 24px;
             border: 1px solid var(--accent);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             color: whitesmoke;
-            text-align: center; 
+            text-align: center;
+            position: relative;
+            z-index: 2;
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(141, 85, 36, 0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(106, 255, 41, 0.1);
         }
 
         .card-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100px;
-    color: var(--primary);
-    
-}
-
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100px;
+            color: var(--primary);
+        }
 
         .card h3 {
             font-family: 'Playfair Display', serif;
@@ -245,6 +313,8 @@
             color: var(--white);
             padding: 4rem 2rem;
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
 
         .footer-content {
@@ -299,12 +369,146 @@
                 height: 250px;
             }
         }
+        .card {
+    background: var(--background);
+    padding: 2.5rem;
+    border-radius: 24px;
+    border: 1px solid var(--accent);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    color: whitesmoke;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(106, 255, 41, 0.1) 0%,
+        rgba(106, 255, 41, 0.05) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+}
+
+.card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(106, 255, 41, 0.15);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+/* Add animation for card content */
+.card h3,
+.card p,
+.card img,
+.card li,
+.card a {
+    transition: transform 0.4s ease, opacity 0.3s ease;
+}
+
+.card:hover h3 {
+    transform: translateY(-5px);
+    color: var(--primary);
+}
+
+.card:hover img {
+    transform: scale(1.05);
+    transition: transform 0.5s ease;
+}
+
+.card:hover p,
+.card:hover li {
+    transform: translateY(5px);
+}
+
+/* Add a subtle glow effect */
+.card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 40px rgba(106, 255, 41, 0.2);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border-radius: 24px;
+    z-index: -2;
+}
+
+.card:hover::after {
+    opacity: 1;
+}
+
+/* Enhance links within cards */
+.card a {
+    position: relative;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    border-radius: 12px;
+    background: rgba(106, 255, 41, 0.1);
+    transition: all 0.3s ease;
+}
+
+.card a:hover {
+    background: rgba(106, 255, 41, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(106, 255, 41, 0.2);
+}
+
+/* Add smooth transitions for card content */
+.card > * {
+    transition: all 0.3s ease;
+}
+
+/* Add a subtle border animation */
+@keyframes borderGlow {
+    0% {
+        box-shadow: 0 0 10px rgba(106, 255, 41, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(106, 255, 41, 0.4);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(106, 255, 41, 0.2);
+    }
+}
+
+.card:hover {
+    animation: borderGlow 2s infinite;
+}
+
+/* Add responsive adjustments */
+@media (max-width: 768px) {
+    .card:hover {
+        transform: translateY(-10px) scale(1.01);
+    }
+}
     </style>
 </head>
 <body>
+    <!-- Bubble Container -->
+    <div class="bubble-wrap" id="bubbleWrap"></div>
+
+    <!-- Your existing content -->
     <nav class="navbar">
         <div class="nav-content">
-            <div class="nav-brand1">Divya.</div>
+            <div class="nav-brand1">Dshree.</div>
             <div class="nav-links">
                 <a href="#about">About</a>
                 <a href="#expertise">Expertise</a>
@@ -315,7 +519,7 @@
             </div>
         </div>
     </nav>
-
+<!--  -->
     <section id="about"class="hero">
         <div class="hero-content">
             <div class="hero-text">
@@ -335,38 +539,42 @@
         </div>
     </section>
 
-    <section id="expertise" class="expertise">
+    <section class="expertise">
         <h2 class="section-title">Areas of Expertise</h2>
-        <div class="cards-grid">
+        <div id="expertise" class="cards-grid">
             <div class="card">
-                 <div class="card-icon"><!--<img src="fulll logo.png" width="100px" height="100px" style="display: flex; justify-content: center;" alt="not found" > --></div> 
-                <h3>Full stack Developer</h3>
-                <img src="fulll logo2.png" width="318px" height="200px" alt="not found" >
-                <p>Created a Finance website Using MERN</p>
-                <p>Created a Backend for Event Management using Express nodejs</p>
+                <h3>Languages</h3>
+                <ul>
+                    <li>React.js</li>
+                    <li>Express</li>
+                    <li>Node.js</li>
+                    <li>HTML, CSS</li>
+                    <li>Python, C</li>
+                </ul>
             </div>
             <div class="card">
-                <div class="card-icon"> <!--<img src="fig logo.jpeg" alt="not found" width="100px" height="100px" style="display: flex; justify-content: center;" >--></div> 
-                <h3>Project desginer</h3>
-                <img src="fig logo2.jpeg" width="318px" height="200px" alt="not found" >
-                <p>Crafting intuitive Poster and logo </p>
-                <p>Created a frontend ui design for H-care website </p>
-                <p>Created a Poster  design for Devhost sample </p>
+                <h3>Designer</h3>
+                <p>Tools</p>
+                <ul>
+                    <li>Figma</li>
+                    <li>Canva</li>
+                </ul>
             </div>
             <div class="card">
-                <div class="card-icon"><!--<img src="lead logo.png" width="100px" height="100px" style="display: flex; justify-content: center;" alt="not found" >--></div>
                 <h3>Leadership Skills</h3>
-                <img src="lead logo2.png" width="318px" height="200px" alt="not found" >
-                <p>Mentor Role for internship students @Coding key Company</p>
-                <p>Volunteer of IEEE Cosmic Event-2024</p>
-                <p>Volunteer of SIH-2024 @Sahyadri college</p>
-                <p>Volunteer of Intra college event "Synergia-DEVHOST(2024)" @Sahyadri college</p>
+                <ul>
+                    <li>Mentor Role for internship students @Coding Key Company</li>
+                    <li>Volunteer for IEEE Cosmic Event-2024</li>
+                    <li>Volunteer for SIH-2024 @Sahyadri College</li>
+                    <li>Volunteer for "Synergia-DEVHOST(2024)" @Sahyadri College</li>
+                </ul>
             </div>
         </div>
     </section>
-    <section class="Experience" id="Experience" style="padding: 8rem 2rem; background: var(--background);">
+    
+    <section class="Experience" style="padding: 8rem 2rem; background: var(--background);">
         <h2 class="section-title">Experience</h2>
-        <div class="cards-grid" style="max-width: 1200px; margin: 0 auto;">
+        <div id="Experience"  class="cards-grid" style="max-width: 1200px; margin: 0 auto;">
             <div class="card">
                 <h3>Integral Engineer</h3>
                 <img src="logo.jpeg" alt="not found">
@@ -376,7 +584,7 @@
                 </ul>
                 <a href="https://github.com/divya05shree/Ericsson-internship" 
                        style="color: var(--primary); text-decoration: underline;"
-                       target="_blank">GitHub Repository</a>
+                       target="_blank"><img src="github logo.png" width="35px" height="35px"></a>
             </div>
             
             <div class="card">
@@ -388,7 +596,7 @@
                 </ul>
                 <a href="https://github.com/divya05shree/codsoft11" 
                        style="color: var(--primary); text-decoration: underline;"
-                       target="_blank">GitHub Repository</a>
+                       target="_blank"><img src="github logo.png" width="35px" height="35px"></a>
             </div>
     
             <div class="card">
@@ -400,28 +608,26 @@
                 </ul>
                 <a href="https://github.com/divya05shree/codsoft11" 
                        style="color: var(--primary); text-decoration: underline;"
-                       target="_blank">GitHub Repository</a>
+                       target="_blank"><img src="github logo.png" width="35px" height="35px"> </a>
             </div>
         </div>
     </section>
     
     <!-- Projects Section -->
-    <section id ="Projects"class="Projects" style="padding: 8rem 2rem; background: var(--white);">
+    <section class="Projects" style="padding: 8rem 2rem; background: var(--white);">
         <h2 class="section-title">Projects</h2>
-        <div class="cards-grid" style="max-width: 1200px; margin: 0 auto;">
+        <div id ="Projects" class="cards-grid" style="max-width: 1200px; margin: 0 auto;">
             <div class="card">
                 <h3>AI-Driven Depression Recovery Tool</h3>
-                <img src="ai.jpg" alt="not found" width="318px" height="159px">
+                <img src="ai.jpg" alt="not found" width="318px" height="159px"><br>
+                <a href="https://github.com/divya05shree/Ai_Driven_Depression_recovery" 
+                style="color: var(--primary); text-decoration: underline;"
+                target="_blank"><img src="github logo.png" width="35px" height="35px"></a>
                 <p style="margin-bottom: 1rem;">
-                    <a href="https://github.com/divya05shree/Ai_Driven_Depression_recovery" 
-                       style="color: var(--primary); text-decoration: underline;"
-                       target="_blank">GitHub Repository</a>
+                   
                 </p>
-                <ul style="list-style: none;">
-                    <li style="margin-bottom: 0.8rem;">• Developed an AI-powered tool using CNN for Facial Emotion Recognition (FER) and Naive Bayes for text emotion analysis</li>
-                    <li style="margin-bottom: 0.8rem;">• Implemented preprocessing techniques for facial detection and text cleaning</li>
-                    <li>• Integrated Beck's Depression Inventory (BDI) scoring for predictive modeling</li>
-                </ul>
+                <p>AI-Driven Depression Tool where Pyschiatrist analyze the level of Depression</p>
+                <p>Technologies:React.js,Express,Node.js,Gemini LLM model..</p>
             </div>
     
             <div class="card">
@@ -430,40 +636,44 @@
                 <p style="margin-bottom: 1rem;">
                     <a href="https://github.com/divya05shree/Placement_preparation_planner" 
                        style="color: var(--primary); text-decoration: underline;"
-                       target="_blank">GitHub Repository</a>
+                       target="_blank"><img src="github logo.png" width="35px" height="35px"></a>
                 </p>
-                <ul style="list-style: none;">
-                    <li style="margin-bottom: 0.8rem;">• Created a structured planner for engineering students covering technical skills, soft skills, and aptitude</li>
-                    <li style="margin-bottom: 0.8rem;">• Provided personalized guidance through backend integration</li>
-                    <li>• Enhanced user experience with real-time tracking and resource updates</li>
+               
+                    <p > Created a structured planner for engineering students covering technical skills, soft skills, and aptitude</p>
+                    <p>Technologies:React.js,express,Node.js,Mysql</p>
+
                 </ul>
             </div>
         </div>
-        <section id="certificates" class="certificates">
+        <section class="certificates">
             <h2 class="section-title">Certificates</h2>
-            <div class="cards-grid">
+            <div id="certificates"  class="cards-grid">
                 <div class="card">
                     <!-- <div class="card-icon"><img src="ml.png" width="318px" height="159px" style="display: flex; justify-content: center;" alt="not found" ></div> -->
                     <h3>Machine Learning</h3>
                     <img src="ml.png" width="318px" height="180px" alt="not found" >
+                    <p>May 29, 2024</p>
                     
                 </div>
                 <div class="card">
                     <!-- <div class="card-icon"><img src="fig logo.jpeg" alt="not found" width="100px" height="100px" style="display: flex; justify-content: center;" ></div> -->
                     <h3>Power-Bi</h3>
                     <img src="powerbi.png" width="318px" height="180px" alt="not found" >
+                    <p>December 19, 2024</p>
                    
                 </div>
                 <div class="card">
                     <!-- <div class="card-icon"><img src="lead logo.png" width="100px" height="100px" style="display: flex; justify-content: center;" alt="not found" ></div> -->
                     <h3>Postman Api</h3>
                     <img src="postman.png" width="318px" height="180px" alt="not found" >
+                    <p>October 19, 2024</p>
                    
                 </div>
                 <div class="card">
                     <!-- <div class="card-icon"><img src="lead logo.png" width="100px" height="100px" style="display: flex; justify-content: center;" alt="not found" ></div> -->
                     <h3>Tce-Full stack development</h3>
                     <img src="tce.png" alt="not found" width="320px" height="270px">
+                    <p>March 31, 2024</p>
                    
                 </div>
             </div>
@@ -491,28 +701,66 @@
     </footer>
 
     <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Smooth scroll for navigation links
+        // Improved scroll handling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
+                
                 if (target) {
+                    // Get navbar height dynamically
+                    const navbar = document.querySelector('.navbar');
+                    const navbarHeight = navbar.offsetHeight;
+                    
+                    // Calculate position accounting for navbar
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+                    const offsetPosition = targetPosition - navbarHeight;
+
                     window.scrollTo({
-                        top: target.offsetTop - 70,
+                        top: offsetPosition,
                         behavior: 'smooth'
                     });
                 }
             });
+        });
+
+        // Enhanced navbar scroll effect
+        const navbar = document.querySelector('.navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', function() {
+            const currentScroll = window.pageYOffset;
+
+            // Add scrolled class for styling
+            if (currentScroll > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Add scroll-padding to handle fixed header
+        document.documentElement.style.setProperty('scroll-padding-top', '80px');
+
+        // Handle initial hash in URL
+        window.addEventListener('load', function() {
+            if (window.location.hash) {
+                const target = document.querySelector(window.location.hash);
+                if (target) {
+                    setTimeout(() => {
+                        const navbarHeight = document.querySelector('.navbar').offsetHeight;
+                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+                        const offsetPosition = targetPosition - navbarHeight;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }, 100);
+                }
+            }
         });
     </script>
 </body>
